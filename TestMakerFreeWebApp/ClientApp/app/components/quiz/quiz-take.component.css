@@ -1,0 +1,11 @@
+﻿.quiz-take,
+.quiz-exist,
+.quiz-submit {
+  width: 80%;
+}
+@media (max-width: 767px) {
+  .quiz-take,
+  .quiz-exist {
+    width: 100%;
+  }
+}

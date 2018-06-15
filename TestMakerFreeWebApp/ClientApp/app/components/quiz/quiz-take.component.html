@@ -1,0 +1,47 @@
+﻿<div class="quiz-take" *ngIf="questionsAndAnswersExist() && !quizSubmitted">
+    <h2>{{quiz.Title}}</h2>
+    <br />
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div *ngFor="let question of questionsArray" class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ question.questionText }}</h3>
+            </div>
+            
+            <div class="form-group panel-body" *ngFor="let answer of question.answers">
+                <input [name]="question.questionId"
+                       type="radio"
+                       [value]="answer.Value"
+                       ngModel
+                       required>
+                {{ answer.Text }}
+            </div>
+        </div>
+
+        <div class="form-group commands">
+            <button type="submit"
+                    [disabled]="form.invalid"
+                    class="btn btn-success">
+                Submit my answers
+            </button>
+            <button type="submit"
+                    (click)="onBack()"
+                    class="btn btn-default">
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="quiz-exist" *ngIf="!questionsAndAnswersExist() && !quizSubmitted">
+    <h2>Loading questions...</h2>
+    <h3>If questions do not load, register or login to create your own quiz and questions!</h3>
+</div>
+
+<div class="quiz-submit" *ngIf="quizSubmitted">
+    <h3>Your result is: {{this.userOutcome}}</h3>
+        <button type="submit"
+                (click)="onBack()"
+                class="btn btn-default">
+            Back to quiz
+        </button>
+</div>

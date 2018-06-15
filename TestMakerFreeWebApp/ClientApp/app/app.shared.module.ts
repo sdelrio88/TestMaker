@@ -1,34 +1,88 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+
+import { AuthService } from './services/auth.service';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
+import { QuizListComponent } from './components/quiz/quiz-list.component';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { QuizEditComponent } from './components/quiz/quiz-edit.component';
+import { QuizSearchComponent } from './components/quiz/quiz-search.component';
+import { QuestionListComponent } from './components/question/question-list.component';
+import { QuestionEditComponent } from './components/question/question-edit.component';
+import { AnswerListComponent } from './components/answer/answer-list.component';
+import { AnswerEditComponent } from './components/answer/answer-edit.component';
+import { ResultListComponent } from './components/result/result-list.component';
+import { ResultEditComponent } from './components/result/result-edit.component';
+import { AboutComponent } from './components/about/about.component';
+import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { RegisterComponent } from './components/user/register.component';
+import { LoginFacebookComponent } from './components/login/login.facebook.component';
+import { QuizTakeComponent } from './components/quiz/quiz-take.component';
+
+import { FilterPipe } from './filters/filter.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        QuizListComponent,
+        QuizComponent,
+        QuizEditComponent,
+        QuizSearchComponent,
+        QuizTakeComponent,
+        QuestionListComponent,
+        QuestionEditComponent,
+        AnswerListComponent,
+        AnswerEditComponent,
+        ResultListComponent,
+        ResultEditComponent,
+        AboutComponent,
+        LoginComponent,
+        PageNotFoundComponent,
+        RegisterComponent,
+        LoginFacebookComponent,
+        FilterPipe
     ],
     imports: [
         CommonModule,
-        HttpModule,
+        HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: 'quiz/create', component: QuizEditComponent },
+            { path: 'quiz/edit/:id', component: QuizEditComponent },
+            { path: 'quiz/:id', component: QuizComponent },
+            { path: 'quiz/:id/take/:id2', component: QuizTakeComponent },
+            { path: 'question/create/:id', component: QuestionEditComponent },
+            { path: 'question/edit/:id', component: QuestionEditComponent },
+            { path: 'answer/create/:id', component: AnswerEditComponent },
+            { path: 'answer/edit/:id', component: AnswerEditComponent },
+            { path: 'result/create/:id', component: ResultEditComponent },
+            { path: 'result/edit/:id', component: ResultEditComponent },
+            { path: 'about', component: AboutComponent },
+            { path: 'login', component: LoginComponent },
+            { path: 'register', component: RegisterComponent },
+            { path: '**', component: PageNotFoundComponent }
         ])
+    ],
+    providers: [
+        AuthService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
     ]
 })
 export class AppModuleShared {

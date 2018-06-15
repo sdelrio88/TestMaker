@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "ClientApp/app/components/question/question-edit.component.css",
+    "inputFile": "ClientApp/app/components/question/question-edit.component.less"
+  },
+  {
+    "outputFile": "ClientApp/app/components/quiz/quiz.component.css",
+    "inputFile": "ClientApp/app/components/quiz/quiz.component.less"
+  },
+  {
+    "outputFile": "ClientApp/app/components/quiz/quiz-take.component.css",
+    "inputFile": "ClientApp/app/components/quiz/quiz-take.component.less"
+  }
+]

@@ -7,7 +7,6 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]="['/home']">TestMakerFreeWebApp</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
@@ -18,13 +17,23 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
+                    <a [routerLink]="['/about']">
+                        <span class='glyphicon glyphicon-info-sign'></span> About
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                <li *ngIf="!this.auth.isLoggedIn()" [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/login']">
+                        <span class='glyphicon glyphicon-log-in'></span> Login / Register
+                    </a>
+                </li>
+                <li *ngIf="this.auth.isLoggedIn()" [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/quiz/create']">
+                        <span class='glyphicon glyphicon-plus'></span> Create A Quiz
+                    </a>
+                </li>
+                <li *ngIf="this.auth.isLoggedIn()">
+                    <a (click)="logout()">
+                        <span class='glyphicon glyphicon-log-out'></span> Logout
                     </a>
                 </li>
             </ul>
